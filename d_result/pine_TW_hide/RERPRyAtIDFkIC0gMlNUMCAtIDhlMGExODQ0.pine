@@ -1,0 +1,62 @@
+//Welcome to © Tuisku Trading Strategy, a sophisticated and optimised solution created by the experienced team at Tuisku.eu. Our team of experts specialise in random forest AI, harnessing its powerful capabilities to improve trading performance.
+//Tuisku's commitment to quality and innovation shines through in every aspect of this strategy.
+
+// Training model statistics: Dates 2019-09-19 to 2024-08-12. Correct positive entries: 58.3% (169/290) . Correct operations (positive and negative) 57.9% (197/340) .
+// Technical base pattern: L_Stochastic_RSI, L_Triple_EMA
+// ID_model: DDOG_1d_2ST0_8e0a1844 Date Creation: 2024/08/30 Recommended expiry date : 2025/04/30
+//@version=5
+strategy("Tuisku_DDOG_1d_2ST0_8e0a1844", overlay=true, margin_long=1000, margin_short=1000, pyramiding=5)
+//RANDOM FOREST AI 
+decision_tree_0_DDOG_1d_8e0a1844(d_k, k, smoothK_k, rsi1, d, smoothD_d, ema2, ema12, ema1, ema13, tema, ema3)=>
+	var float ret = 0  // # DecisionTreeRegressor(max_depth=5, max_features=sqrt, max_leaf_nodes=32,min_samples_leaf=2, min_samples_split=10,random_state=1163728818)
+	if( ema2 <= 75.4219 )
+		if( ema2 <= 64.4948 )
+			if( smoothD_d <= 77.8724 )
+				if( ema3 <= 43.5873 )
+					if( ema13 <= 1.70201 )
+						ret := 0.454545
+					if( ema13 > 1.70201 )
+						ret := -0.400000
+				if( ema3 > 43.5873 )
+					if( smoothK_k <= 2.13075 )
+						ret := -0.111111
+					if( smoothK_k > 2.13075 )
+						ret := -0.684211
+			if( smoothD_d > 77.8724 )
+				if( smoothD_d <= 94.9613 )
+					if( ema12 <= 1.54944 )
+						ret := 0.446809
+					if( ema12 > 1.54944 )
+						ret := 0.944444
+				if( smoothD_d > 94.9613 )
+					if( tema <= 35.186 )
+						ret := -1.000000
+					if( tema > 35.186 )
+						ret := 0.000000
+		if( ema2 > 64.4948 )
+			if( smoothD_d <= 80.1175 )
+				if( ema3 <= 74.5734 )
+					if( ema3 <= 64.4856 )
+						ret := 0.000000
+					if( ema3 > 64.4856 )
+						ret := 0.777778
+				if( ema3 > 74.5734 )
+					if( k <= 7.16449 )
+						ret := 1.000000
+					if( k > 7.16449 )
+						ret := 0.200000
+			if( smoothD_d > 80.1175 )
+				if( ema1 <= 71.0044 )
+					ret := -0.333333
+				if( ema1 > 71.0044 )
+					if( ema3 <= 71.8659 )
+						ret := 0.916667
+					if( ema3 > 71.8659 )
+						ret := -0.400000
+	if( ema2 > 75.4219 )
+		if( d <= 96.9452 )
+			if( smoothK_k <= 73.7524 )
+				if( ema2 <= 102.399 )
+
+	...
+The rest of this Pine script is part of the paid version. Visit the website for more info.

@@ -1,0 +1,62 @@
+//Welcome to © Tuisku Trading Strategy, a sophisticated and optimised solution created by the experienced team at Tuisku.eu. Our team of experts specialise in random forest AI, harnessing its powerful capabilities to improve trading performance.
+//Tuisku's commitment to quality and innovation shines through in every aspect of this strategy.
+
+// Training model statistics: Dates 2019-06-12 to 2024-08-12. Correct positive entries: 81.7% (245/300) . Correct operations (positive and negative) 72.4% (260/359) .
+// Technical base pattern: L_Bollinger_Bands, L_Bull_Bear_Power
+// ID_model: CRWD_1d_2BB0_42664f5a Date Creation: 2024/08/30 Recommended expiry date : 2025/04/30
+//@version=5
+strategy("Tuisku_CRWD_1d_2BB0_42664f5a", overlay=true, margin_long=1000, margin_short=1000, pyramiding=5)
+//RANDOM FOREST AI 
+decision_tree_0_CRWD_1d_42664f5a(Lower_Band, basis, Upper_Band, bullPower, bbp, bearPower, bbm)=>
+	var float ret = 0  // # DecisionTreeRegressor(max_depth=5, max_features=sqrt, max_leaf_nodes=68,min_samples_leaf=13, min_samples_split=22,random_state=1121506944)
+	if( Lower_Band <= 39.5417 )
+		ret := 0.680000
+	if( Lower_Band > 39.5417 )
+		if( Upper_Band <= 74.6845 )
+			if( Upper_Band <= 55.3609 )
+				ret := 0.866667
+			if( Upper_Band > 55.3609 )
+				if( bearPower <= -0.165141 )
+					if( basis <= 58.565 )
+						ret := -0.448276
+					if( basis > 58.565 )
+						ret := -0.968750
+				if( bearPower > -0.165141 )
+					if( basis <= 57.554 )
+						ret := 0.125000
+					if( basis > 57.554 )
+						ret := -0.307692
+		if( Upper_Band > 74.6845 )
+			if( Upper_Band <= 85.2162 )
+				if( bullPower <= 4.88143 )
+					ret := 0.920000
+				if( bullPower > 4.88143 )
+					ret := 0.230769
+			if( Upper_Band > 85.2162 )
+				if( Lower_Band <= 88.1592 )
+					if( bullPower <= 0.545378 )
+						ret := -0.615385
+					if( bullPower > 0.545378 )
+						ret := -0.103448
+				if( Lower_Band > 88.1592 )
+					if( Lower_Band <= 96.2214 )
+						ret := 0.523077
+					if( Lower_Band > 96.2214 )
+						ret := 0.025773
+	
+    ret //return
+//CODE associated with the technical indicator L_Bollinger_Bands 
+//@version=5
+//indicator shorttitle="BB", title="Bollinger Bands", overlay=true, timeframe="", timeframe_gaps=true)
+length_BB = input.int(20, minval=1)
+maType = input.string("SMA", "Basis MA Type", options = ["SMA", "EMA", "SMMA (RMA)", "WMA", "VWMA"])
+src = input(close, title="Source")
+mult = input.float(2.0, minval=0.001, maxval=50, title="StdDev")
+
+ma(source, length_BB, _type) =>
+    switch _type
+        "SMA" => ta.sma(source, length_BB)
+        "EMA" => ta.ema(source, length_BB)
+
+	...
+The rest of this Pine script is part of the paid version. Visit the website for more info.

@@ -1,0 +1,62 @@
+//Welcome to © Tuisku Trading Strategy, a sophisticated and optimised solution created by the experienced team at Tuisku.eu. Our team of experts specialise in random forest AI, harnessing its powerful capabilities to improve trading performance.
+//Tuisku's commitment to quality and innovation shines through in every aspect of this strategy.
+
+// Training model statistics: Dates 2015-01-02 to 2024-08-12. Correct positive entries: 73.8% (413/560) . Correct operations (positive and negative) 66.0% (444/673) .
+// Technical base pattern: L_Stochastic_RSI, L_Triple_EMA
+// ID_model: MSFT_1d_2ST0_16aac09f Date Creation: 2024/08/30 Recommended expiry date : 2025/04/30
+//@version=5
+strategy("Tuisku_MSFT_1d_2ST0_16aac09f", overlay=true, margin_long=1000, margin_short=1000, pyramiding=5)
+//RANDOM FOREST AI 
+decision_tree_0_MSFT_1d_16aac09f(rsi1, smoothK_k, d, k, d_k, smoothD_d, ema3, ema12, ema1, ema2, tema, ema13)=>
+	var float ret = 0  // # DecisionTreeRegressor(criterion=friedman_mse, max_depth=5,max_features=sqrt, max_leaf_nodes=122,min_samples_leaf=9, min_samples_split=22,random_state=6506430)
+	if( rsi1 <= 50.4454 )
+		if( ema1 <= 261.291 )
+			if( ema1 <= 193.585 )
+				if( ema2 <= 156.555 )
+					if( ema13 <= -0.75769 )
+						ret := 0.564103
+					if( ema13 > -0.75769 )
+						ret := 0.116592
+				if( ema2 > 156.555 )
+					if( d_k <= 0.891083 )
+						ret := -0.944444
+					if( d_k > 0.891083 )
+						ret := -0.444444
+			if( ema1 > 193.585 )
+				if( tema <= 228.726 )
+					if( ema1 <= 218.684 )
+						ret := 0.661017
+					if( ema1 > 218.684 )
+						ret := 0.954545
+				if( tema > 228.726 )
+					if( tema <= 243.799 )
+						ret := -0.062500
+					if( tema > 243.799 )
+						ret := 0.633803
+		if( ema1 > 261.291 )
+			if( k <= 27.0355 )
+				if( ema3 <= 420.49 )
+					if( k <= 9.70182 )
+						ret := 0.125000
+					if( k > 9.70182 )
+						ret := 0.534483
+				if( ema3 > 420.49 )
+					if( smoothK_k <= 1.16148 )
+						ret := -0.666667
+					if( smoothK_k > 1.16148 )
+						ret := -0.846154
+			if( k > 27.0355 )
+				if( smoothK_k <= 71.4052 )
+					if( tema <= 300.825 )
+						ret := -0.833333
+					if( tema > 300.825 )
+						ret := -0.440000
+				if( smoothK_k > 71.4052 )
+					if( ema2 <= 287.749 )
+						ret := -0.909091
+					if( ema2 > 287.749 )
+						ret := 0.533333
+	if( rsi1 > 50.4454 )
+
+	...
+The rest of this Pine script is part of the paid version. Visit the website for more info.

@@ -1,0 +1,62 @@
+//Welcome to © Tuisku Trading Strategy, a sophisticated and optimised solution created by the experienced team at Tuisku.eu. Our team of experts specialise in random forest AI, harnessing its powerful capabilities to improve trading performance.
+//Tuisku's commitment to quality and innovation shines through in every aspect of this strategy.
+
+// Training model statistics: Dates 2019-03-29 to 2024-08-12. Correct positive entries: 60.7% (176/290) . Correct operations (positive and negative) 61.4% (215/350) .
+// Technical base pattern: Blai5_Koncorde_v10
+// ID_model: LYFT_1d_1KON_9bb3f45c Date Creation: 2024/08/30 Recommended expiry date : 2025/04/30
+//@version=5
+strategy("Tuisku_LYFT_1d_1KON_9bb3f45c", overlay=true, margin_long=1000, margin_short=1000, pyramiding=5)
+//RANDOM FOREST AI 
+decision_tree_0_LYFT_1d_9bb3f45c(nvim, pvimax, verde_mean, media_azul, source, BollOsc, azul_mean, xrsi, media, tprice, pvi, oscp, pvimin, nvimax, marron, stoc, verde, pvi_ema, xmf, pvim, nvimin, verde_azul, azul, nvi, marron_mean, nvi_ema, verde_media)=>
+	var float ret = 0  // # DecisionTreeRegressor(max_depth=5, max_features=0.5, max_leaf_nodes=122,min_samples_leaf=2, min_samples_split=10,random_state=670987672)
+	if( nvim <= -0.670491 )
+		if( pvimax <= 0.380249 )
+			if( media <= 81.2145 )
+				if( pvimax <= 0.21032 )
+					if( oscp <= 24.8541 )
+						ret := 0.642857
+					if( oscp > 24.8541 )
+						ret := -0.555556
+				if( pvimax > 0.21032 )
+					if( BollOsc <= 70.4445 )
+						ret := 0.977273
+					if( BollOsc > 70.4445 )
+						ret := 0.000000
+			if( media > 81.2145 )
+				ret := -0.333333
+		if( pvimax > 0.380249 )
+			if( marron_mean <= 48.8157 )
+				if( source <= 14.8466 )
+					if( nvim <= -1.37325 )
+						ret := -0.217391
+					if( nvim > -1.37325 )
+						ret := 0.524138
+				if( source > 14.8466 )
+					if( source <= 33.4133 )
+						ret := -0.221154
+					if( source > 33.4133 )
+						ret := 0.549020
+			if( marron_mean > 48.8157 )
+				if( verde_azul <= 149.546 )
+					if( media_azul <= 73.9027 )
+						ret := -0.404908
+					if( media_azul > 73.9027 )
+						ret := 0.030120
+				if( verde_azul > 149.546 )
+					if( tprice <= 17.595 )
+						ret := 0.821429
+					if( tprice > 17.595 )
+						ret := 0.100000
+	if( nvim > -0.670491 )
+		if( xrsi <= 25.1532 )
+			ret := 0.714286
+		if( xrsi > 25.1532 )
+			if( nvi <= -0.650998 )
+				if( verde_azul <= 56.1145 )
+					ret := -0.250000
+				if( verde_azul > 56.1145 )
+					ret := -1.000000
+			if( nvi > -0.650998 )
+
+	...
+The rest of this Pine script is part of the paid version. Visit the website for more info.

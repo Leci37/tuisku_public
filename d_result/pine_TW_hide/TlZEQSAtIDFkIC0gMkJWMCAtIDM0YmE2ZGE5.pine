@@ -1,0 +1,62 @@
+//Welcome to © Tuisku Trading Strategy, a sophisticated and optimised solution created by the experienced team at Tuisku.eu. Our team of experts specialise in random forest AI, harnessing its powerful capabilities to improve trading performance.
+//Tuisku's commitment to quality and innovation shines through in every aspect of this strategy.
+
+// Training model statistics: Dates 2015-01-02 to 2024-08-12. Correct positive entries: 75.7% (433/572) . Correct operations (positive and negative) 69.0% (465/674) .
+// Technical base pattern: L_Bull_Bear_Power, L_Vortex_Indicator
+// ID_model: NVDA_1d_2BV0_34ba6da9 Date Creation: 2024/08/30 Recommended expiry date : 2025/04/30
+//@version=5
+strategy("Tuisku_NVDA_1d_2BV0_34ba6da9", overlay=true, margin_long=1000, margin_short=1000, pyramiding=5)
+//RANDOM FOREST AI 
+decision_tree_0_NVDA_1d_34ba6da9(bearPower, bbp, bbm, bullPower, VIP, VIP_VIM, VIM)=>
+	var float ret = 0  // # DecisionTreeRegressor(max_depth=5, max_features=0.76, max_leaf_nodes=68,min_samples_leaf=5, random_state=1770439087)
+	if( bbp <= 0.480655 )
+		if( bearPower <= -2.83626 )
+			if( bullPower <= 1.08234 )
+				if( bbp <= -5.27875 )
+					if( bbm <= 4.86 )
+						ret := -0.285714
+					if( bbm > 4.86 )
+						ret := 0.428571
+				if( bbp > -5.27875 )
+					if( VIP_VIM <= -0.241455 )
+						ret := 1.000000
+					if( VIP_VIM > -0.241455 )
+						ret := 0.750000
+			if( bullPower > 1.08234 )
+				ret := -0.500000
+		if( bearPower > -2.83626 )
+			if( bearPower <= -1.69128 )
+				if( VIP_VIM <= -0.435196 )
+					if( VIP <= 0.713147 )
+						ret := 0.000000
+					if( VIP > 0.713147 )
+						ret := -0.897436
+				if( VIP_VIM > -0.435196 )
+					if( bearPower <= -1.96583 )
+						ret := 0.458333
+					if( bearPower > -1.96583 )
+						ret := -0.566667
+			if( bearPower > -1.69128 )
+				if( VIP <= 0.84692 )
+					if( bbm <= 0.405 )
+						ret := 0.122951
+					if( bbm > 0.405 )
+						ret := 0.641026
+				if( VIP > 0.84692 )
+					if( VIM <= 1.09252 )
+						ret := 0.017798
+					if( VIM > 1.09252 )
+						ret := -0.261830
+	if( bbp > 0.480655 )
+		if( bearPower <= -0.345251 )
+			if( bbm <= 4.5 )
+				if( bbm <= 3.09807 )
+					ret := -0.571429
+				if( bbm > 3.09807 )
+					ret := -1.000000
+			if( bbm > 4.5 )
+				ret := 0.000000
+		if( bearPower > -0.345251 )
+
+	...
+The rest of this Pine script is part of the paid version. Visit the website for more info.

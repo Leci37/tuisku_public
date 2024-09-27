@@ -1,0 +1,62 @@
+//Welcome to © Tuisku Trading Strategy, a sophisticated and optimised solution created by the experienced team at Tuisku.eu. Our team of experts specialise in random forest AI, harnessing its powerful capabilities to improve trading performance.
+//Tuisku's commitment to quality and innovation shines through in every aspect of this strategy.
+
+// Training model statistics: Dates 2019-05-10 to 2024-08-12. Correct positive entries: 66.7% (202/303) . Correct operations (positive and negative) 63.2% (230/364) .
+// Technical base pattern: L_MA_Cross_SMA, L_Money_Flow_Index
+// ID_model: UBER_1d_2MM0_416c9a05 Date Creation: 2024/08/30 Recommended expiry date : 2025/04/30
+//@version=5
+strategy("Tuisku_UBER_1d_2MM0_416c9a05", overlay=true, margin_long=1000, margin_short=1000, pyramiding=5)
+//RANDOM FOREST AI 
+decision_tree_0_UBER_1d_416c9a05(Short_MA, Short_Long_Diff, MA_Cross, Long_MA, Positive_Money_Flow_Sum, Negative_Money_Flow_Sum, Positive_Money_Flow, MFI_Low, MFI, Raw_Money_Flow, Typical_Price, Money_Flow_Ratio, MFI_High, Negative_Money_Flow)=>
+	var float ret = 0  // # DecisionTreeRegressor(max_depth=5, max_features=0.65, max_leaf_nodes=122,min_samples_leaf=2, min_samples_split=10,random_state=754117105)
+	if( Typical_Price <= 30.725 )
+		if( Negative_Money_Flow_Sum <= 1.02854e+10 )
+			if( Short_Long_Diff <= -2.29904 )
+				ret := 1.000000
+			if( Short_Long_Diff > -2.29904 )
+				if( Positive_Money_Flow_Sum <= 4.68121e+09 )
+					if( MA_Cross <= 0.800312 )
+						ret := 0.524272
+					if( MA_Cross > 0.800312 )
+						ret := -0.600000
+				if( Positive_Money_Flow_Sum > 4.68121e+09 )
+					if( Short_Long_Diff <= 0.75723 )
+						ret := -0.147541
+					if( Short_Long_Diff > 0.75723 )
+						ret := 0.551020
+		if( Negative_Money_Flow_Sum > 1.02854e+10 )
+			if( Short_Long_Diff <= -4.81661 )
+				ret := 1.000000
+			if( Short_Long_Diff > -4.81661 )
+				if( Long_MA <= 36.6892 )
+					if( Money_Flow_Ratio <= 0.209302 )
+						ret := 0.000000
+					if( Money_Flow_Ratio > 0.209302 )
+						ret := -0.954545
+				if( Long_MA > 36.6892 )
+					ret := 1.000000
+	if( Typical_Price > 30.725 )
+		if( Short_Long_Diff <= -1.105 )
+			if( Long_MA <= 37.9106 )
+				if( Positive_Money_Flow_Sum <= 3.07297e+09 )
+					ret := 0.555556
+				if( Positive_Money_Flow_Sum > 3.07297e+09 )
+					if( Positive_Money_Flow <= 1.09986e+09 )
+						ret := -0.875000
+					if( Positive_Money_Flow > 1.09986e+09 )
+						ret := 0.000000
+			if( Long_MA > 37.9106 )
+				if( MFI <= 35.4069 )
+					if( Short_Long_Diff <= -2.39346 )
+						ret := 0.352941
+					if( Short_Long_Diff > -2.39346 )
+						ret := -0.300000
+				if( MFI > 35.4069 )
+					if( Long_MA <= 66.0848 )
+						ret := 0.709091
+					if( Long_MA > 66.0848 )
+						ret := -0.111111
+		if( Short_Long_Diff > -1.105 )
+
+	...
+The rest of this Pine script is part of the paid version. Visit the website for more info.

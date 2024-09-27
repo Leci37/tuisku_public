@@ -1,0 +1,62 @@
+//Welcome to © Tuisku Trading Strategy, a sophisticated and optimised solution created by the experienced team at Tuisku.eu. Our team of experts specialise in random forest AI, harnessing its powerful capabilities to improve trading performance.
+//Tuisku's commitment to quality and innovation shines through in every aspect of this strategy.
+
+// Training model statistics: Dates 2015-01-02 to 2024-08-12. Correct positive entries: 78.7% (452/574) . Correct operations (positive and negative) 70.5% (470/667) .
+// Technical base pattern: Squeeze_Momentum_Indicator
+// ID_model: AMZN_1d_1SQU_62a0b1c6 Date Creation: 2024/08/30 Recommended expiry date : 2025/04/30
+//@version=5
+strategy("Tuisku_AMZN_1d_1SQU_62a0b1c6", overlay=true, margin_long=1000, margin_short=1000, pyramiding=5)
+//RANDOM FOREST AI 
+decision_tree_0_AMZN_1d_62a0b1c6(basis, rangema, sqzOffInt, val, priceRange, lowerBB, upperKC, avgHighLow, dev, lowerKC, sqzOnInt, noSqzInt, upperBB, ma)=>
+	var float ret = 0  // # DecisionTreeRegressor(max_depth=5, max_features=sqrt, max_leaf_nodes=32,min_samples_leaf=5, min_samples_split=6,random_state=756991902)
+	if( avgHighLow <= 31.9533 )
+		if( priceRange <= 2.78807 )
+			if( upperBB <= 27.4106 )
+				if( upperBB <= 27.2626 )
+					if( rangema <= 0.47225 )
+						ret := 0.391304
+					if( rangema > 0.47225 )
+						ret := 0.022727
+				if( upperBB > 27.2626 )
+					if( upperBB <= 27.3117 )
+						ret := -0.666667
+					if( upperBB > 27.3117 )
+						ret := 0.200000
+			if( upperBB > 27.4106 )
+				if( rangema <= 1.0565 )
+					if( sqzOffInt <= 0.5 )
+						ret := 0.815789
+					if( sqzOffInt > 0.5 )
+						ret := 0.550000
+				if( rangema > 1.0565 )
+					if( sqzOffInt <= 0.5 )
+						ret := -1.000000
+					if( sqzOffInt > 0.5 )
+						ret := 0.538462
+		if( priceRange > 2.78807 )
+			ret := -0.714286
+	if( avgHighLow > 31.9533 )
+		if( rangema <= 3.41524 )
+			if( lowerBB <= 97.5398 )
+				if( upperBB <= 101.078 )
+					if( avgHighLow <= 33.804 )
+						ret := -0.538462
+					if( avgHighLow > 33.804 )
+						ret := 0.112878
+				if( upperBB > 101.078 )
+					if( ma <= 98.1019 )
+						ret := -0.318182
+					if( ma > 98.1019 )
+						ret := -0.697674
+			if( lowerBB > 97.5398 )
+				if( upperKC <= 109.678 )
+					if( lowerBB <= 99.2024 )
+						ret := 0.600000
+					if( lowerBB > 99.2024 )
+						ret := 1.000000
+				if( upperKC > 109.678 )
+					if( avgHighLow <= 160.822 )
+						ret := 0.233083
+
+	...
+The rest of this Pine script is part of the paid version. Visit the website for more info.

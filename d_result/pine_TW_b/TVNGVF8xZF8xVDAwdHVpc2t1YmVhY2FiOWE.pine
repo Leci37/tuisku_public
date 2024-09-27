@@ -1,0 +1,241 @@
+//Welcome to © Tuisku Trading Strategy, a sophisticated and optimised solution created by the experienced team at Tuisku.eu. Our team of experts specialise in random forest AI, harnessing its powerful capabilities to improve trading performance.
+//Tuisku's commitment to quality and innovation shines through in every aspect of this strategy.
+
+// Training model statistics: Dates 2015-01-02 to 2024-08-12. Correct positive entries: 78.1% (447/572) . Correct operations (positive and negative) 70.6% (479/678) .
+// Technical base pattern: L_Triple_EMA
+// ID_model: MSFT_1d_1T00_beacab9a Date Creation: 2024/08/30 Recommended expiry date : 2025/04/30
+//@version=5
+strategy("Tuisku_MSFT_1d_1T00_beacab9a", overlay=true, margin_long=1000, margin_short=1000, pyramiding=5)
+//RANDOM FOREST AI 
+decision_tree_0_MSFT_1d_beacab9a(ema3, ema12, ema1, ema2, tema, ema13)=>
+	var float ret = 0  // # DecisionTreeRegressor(max_depth=5, max_features=0.65, max_leaf_nodes=32,min_samples_leaf=2, min_samples_split=6,random_state=1153947861)
+	if( tema <= 261.711 )
+		if( ema3 <= 217.306 )
+			if( ema13 <= -0.75691 )
+				if( ema13 <= -6.13499 )
+					if( tema <= 149.073 )
+						ret := 0.952381
+					if( tema > 149.073 )
+						ret := -0.762712
+				if( ema13 > -6.13499 )
+					if( ema3 <= 214.562 )
+						ret := 0.559871
+					if( ema3 > 214.562 )
+						ret := -0.833333
+			if( ema13 > -0.75691 )
+				if( ema1 <= 213.582 )
+					if( ema1 <= 120.27 )
+						ret := -0.101051
+					if( ema1 > 120.27 )
+						ret := 0.181034
+				if( ema1 > 213.582 )
+					if( ema1 <= 215.351 )
+						ret := -0.500000
+					if( ema1 > 215.351 )
+						ret := -0.951613
+		if( ema3 > 217.306 )
+			if( tema <= 230.018 )
+				if( tema <= 217.502 )
+					if( ema3 <= 218.9 )
+						ret := 1.000000
+					if( ema3 > 218.9 )
+						ret := 0.000000
+				if( tema > 217.502 )
+					if( ema3 <= 242.247 )
+						ret := 0.985075
+					if( ema3 > 242.247 )
+						ret := 0.888889
+			if( tema > 230.018 )
+				if( ema1 <= 252.469 )
+					if( ema2 <= 236.751 )
+						ret := 0.406250
+					if( ema2 > 236.751 )
+						ret := -0.120219
+				if( ema1 > 252.469 )
+					if( ema12 <= 2.37525 )
+						ret := 0.649123
+					if( ema12 > 2.37525 )
+						ret := -0.125000
+	if( tema > 261.711 )
+		if( tema <= 272.704 )
+			if( ema1 <= 262.156 )
+				if( ema13 <= 5.93776 )
+					if( ema2 <= 258.832 )
+						ret := -0.285714
+					if( ema2 > 258.832 )
+						ret := 0.600000
+				if( ema13 > 5.93776 )
+					if( ema2 <= 254.007 )
+						ret := 0.000000
+					if( ema2 > 254.007 )
+						ret := -0.956522
+			if( ema1 > 262.156 )
+				if( tema <= 271.221 )
+					if( tema <= 268.16 )
+						ret := -1.000000
+					if( tema > 268.16 )
+						ret := -0.869565
+				if( tema > 271.221 )
+					if( tema <= 272.084 )
+						ret := 0.000000
+					if( tema > 272.084 )
+						ret := -0.875000
+		if( tema > 272.704 )
+			if( ema1 <= 279.7 )
+				if( ema1 <= 278.274 )
+					if( ema12 <= 3.18776 )
+						ret := -0.800000
+					if( ema12 > 3.18776 )
+						ret := 0.619048
+				if( ema1 > 278.274 )
+					if( ema3 <= 270.931 )
+						ret := 0.800000
+					if( ema3 > 270.931 )
+						ret := 1.000000
+			if( ema1 > 279.7 )
+				if( ema2 <= 285.131 )
+					if( ema13 <= 3.61458 )
+						ret := -0.984615
+					if( ema13 > 3.61458 )
+						ret := -0.377778
+				if( ema2 > 285.131 )
+					if( tema <= 295.048 )
+						ret := 0.600000
+					if( tema > 295.048 )
+						ret := -0.155116
+	
+    ret //return
+//CODE associated with the technical indicator L_Triple_EMA 
+//@version=5
+//indicator title="Triple EMA", shorttitle="TEMA", overlay=true, timeframe="", timeframe_gaps=true)
+length_TEMA = input.int(9, minval=1)
+ema1 = ta.ema(close, length_TEMA)
+ema2 = ta.ema(ema1, length_TEMA)
+ema3 = ta.ema(ema2, length_TEMA)
+tema = 3 * (ema1 - ema2) + ema3
+plot(tema, "TEMA", color=#2962FF)
+
+ema12 = ema1 - ema2
+ema13 = ema1 - ema3
+
+
+// EXPLANATION OF THE STRATEGY
+//The provided Pine Script implements a trading strategy that includes stop loss (SL) and multiple take profit (TP) levels,
+//with an option to activate a trailing stop at the third TP level. Here's a detailed breakdown of its components and functionality:
+
+//Variables Initialization:
+var float stop = na
+var float limit1 = na
+var float limit2 = na
+
+// Converts a percentage to points based on the average position price and the minimum tick size.
+percent2points(percent) =>
+    strategy.position_avg_price * percent / 100 / syminfo.mintick
+
+// Stop Loss and Take Profit Inputs:
+//Defines inputs for stop loss and three take profit levels in percentage terms.
+sl = percent2points(input(2.92, title="stop loss %%"))
+tp1 = percent2points(input(1.12, title="take profit 1 %%"))
+tp2 = percent2points(input(2.31, title="take profit 2 %%"))
+tp3 = percent2points(input(3.91, title="take profit 3 %%"))
+activateTrailingOnThirdStep = input(false,title="activate trailing on third stage (tp3 is amount, tp2 is offset level)")
+
+// Current Profit Calculation:
+//Calculates the current profit in points based on the position size and price.
+curProfitInPts() =>
+    if strategy.position_size > 0
+        (high - strategy.position_avg_price) / syminfo.mintick
+    else if strategy.position_size < 0
+        (strategy.position_avg_price - low) / syminfo.mintick
+    else
+        0
+// Stop Loss and Profit Target Price Calculations:
+//Determines the stop loss and profit target prices based on the position size and offset points.
+calcStopLossPrice(OffsetPts) =>
+    if strategy.position_size > 0
+        strategy.position_avg_price - OffsetPts * syminfo.mintick
+    else if strategy.position_size < 0
+        strategy.position_avg_price + OffsetPts * syminfo.mintick
+    else
+        0
+calcProfitTrgtPrice(OffsetPts) =>
+    calcStopLossPrice(-OffsetPts)
+// Current Stage Determination:
+//Determines the current stage of the trade based on the profit points reached.
+getCurrentStage() =>
+    var stage = 0
+    if strategy.position_size == 0
+        stage := 0
+    if stage == 0 and strategy.position_size != 0
+        stage := 1
+    else if stage == 1 and curProfitInPts() >= tp1
+        stage := 2
+    else if stage == 2 and curProfitInPts() >= tp2
+        stage := 3
+    stage
+stopLevel = -1.
+profitLevel = calcProfitTrgtPrice(tp3)
+
+//This part of the strategy sets up exit conditions based on the current stage of the trade and uses the same exit ID "x" to modify the exit parameters dynamically.
+//The exit parameters include stop loss, take profit, and comments for each stage.
+// based on current stage set up exit
+// note: we use same exit ids ("x") consciously, for MODIFY the exit's parameters
+curStage = getCurrentStage()
+float op_operation = decision_tree_0_MSFT_1d_beacab9a(ema3, ema12, ema1, ema2, tema, ema13)
+
+if (op_operation <= 0)
+    if curStage == 1
+        stopLevel := calcStopLossPrice(sl)
+        strategy.exit("x", loss = sl, profit = tp3, comment = "sl or tp3")
+    else if curStage == 2
+        stopLevel := calcStopLossPrice(0)
+        strategy.exit("x", stop = stopLevel, profit = tp3, comment = "breakeven or tp3")
+    else if curStage == 3
+        stopLevel := calcStopLossPrice(-tp1)
+        strategy.exit("x", stop = stopLevel, profit = tp3, comment = "tp1 or tp3")
+    else
+        strategy.cancel("x")
+
+
+//SIGNAL MANAGE    User Adjustments and Risk Management
+// The user can adjust the threshold values for op_operation to control the level of risk they are willing to take:
+// Lower op_operation Threshold for Buy Signal (e.g., 0.5 instead of 0.55):
+//     Effect: Generates more buy signals, increasing the frequency of trades. This is suitable for a user willing to take more risks and potentially capture more trading opportunities.
+// Higher op_operation Threshold for Buy Signal (e.g., 0.8 instead of 0.55):
+//     Effect: Generates fewer buy signals, reducing the frequency of trades. This is suitable for a user seeking to take fewer risks and only enter trades under more favorable conditions.
+// Lower op_operation Threshold for Signal Closure (e.g., -0.8 instead of -0.9):
+//     Effect: Closes positions less frequently, allowing trades more room to recover from temporary unfavorable conditions. This increases risk but can capture larger gains if the market reverses favorably.
+// Higher op_operation Threshold for Signal Closure (e.g., -0.95 instead of -0.9):
+//     Effect: Closes positions more frequently, exiting trades quickly at the first sign of unfavorable conditions. This decreases risk but may result in missed opportunities for recovery.
+//Signal BUY
+if (op_operation >= 0.55)
+    stop := close * 0.965
+    limit1 := close * 1.03
+    limit2 := close * 1.02
+    strategy.entry("x", strategy.long, 1, stop=stop, comment="in")
+//Signal SELL
+if (op_operation <= -0.9)
+    strategy.close("x", comment = "under Le1")
+
+// Impact on the Dataset
+//Stop Loss (SL): Limits the maximum loss by exiting the position if the price moves against the trade by a specified percentage.
+//Take Profit (TP1, TP2, TP3): Defines profit-taking levels to secure gains at different stages.
+//Trailing Stop: Optionally activates a trailing stop at the third TP level to lock in profits while allowing for further gains if the price continues to move favorably.
+//Position Entry and Exit: The strategy's buy and sell signals determine when to enter and exit positions, influencing the dataset by marking the points of trade execution and closure.
+//Current Stage Tracking: Monitors the trade's progress through predefined stages, adjusting stop and profit levels accordingly.
+//This strategy is designed to manage risk and maximize profits through a structured approach, incorporating multiple exit levels and dynamic adjustments based on market conditions. The dataset will reflect these actions, showing entries, exits, stop loss activations, and profit-taking events, providing valuable information for backtesting and performance analysis.
+//Random forest AI offers significant advantages in trading, including the ability to handle large data sets, reduce overfitting and provide more robust predictions through the aggregation of multiple decision trees.
+
+// NOTE: While the Tuisku team stands behind the quality and effectiveness of this trading strategy,
+// PLEASE be aware that there is NO GUARANTEE of specific results or profits. TRADING INVOLVES SIGNIFICANT RISK, and it is important to use this strategy with careful consideration of your financial situation and risk tolerance.
+// For further information and support, please contact us at Tuisku.eu.
+
+//THRESHOLD_EXAUTIBITY_TABLE default:0.55 
+//|           |   buy_reca |   buy_f1 |   sell_f1 |   buy_reca |   buy_f1 |   sell_f1 |   buy_reca |   buy_f1 |   sell_f1 |   buy_reca |   buy_f1 |   sell_f1 |   buy_reca |   buy_f1 |   sell_f1 |
+//|:----------|-----------:|---------:|----------:|-----------:|---------:|----------:|-----------:|---------:|----------:|-----------:|---------:|----------:|-----------:|---------:|----------:|
+//| Threshold |      0.38  |    0.38  |     0.38  |      0.44  |    0.44  |     0.44  |      0.5   |    0.5   |     0.5   |       0.56 |    0.56  |     0.56  |      0.62  |    0.62  |     0.62  |
+//| Value     |      0.321 |    0.315 |     0.189 |      0.302 |    0.318 |     0.189 |      0.302 |    0.318 |     0.161 |       0.17 |    0.234 |     0.161 |      0.123 |    0.194 |     0.161 |
+//Threshold corresponds to the number of if (op_operation >= 0.55) for buy.
+//The _f1 is how good the model becomes as a function of how much the op_operation threshold changes. 
+//The _reca corresponds to the model's recall Exautibity 
+

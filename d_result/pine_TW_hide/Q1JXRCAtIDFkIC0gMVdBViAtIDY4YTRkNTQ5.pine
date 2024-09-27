@@ -1,0 +1,62 @@
+//Welcome to © Tuisku Trading Strategy, a sophisticated and optimised solution created by the experienced team at Tuisku.eu. Our team of experts specialise in random forest AI, harnessing its powerful capabilities to improve trading performance.
+//Tuisku's commitment to quality and innovation shines through in every aspect of this strategy.
+
+// Training model statistics: Dates 2019-06-12 to 2024-08-12. Correct positive entries: 74.6% (235/315) . Correct operations (positive and negative) 68.1% (248/364) .
+// Technical base pattern: Wave_Trend_Calculation
+// ID_model: CRWD_1d_1WAV_68a4d549 Date Creation: 2024/08/30 Recommended expiry date : 2025/04/30
+//@version=5
+strategy("Tuisku_CRWD_1d_1WAV_68a4d549", overlay=true, margin_long=1000, margin_short=1000, pyramiding=5)
+//RANDOM FOREST AI 
+decision_tree_0_CRWD_1d_68a4d549(tci, ap, ci_wt2, wt2, ci, d_tci, d, esa)=>
+	var float ret = 0  // # DecisionTreeRegressor(max_depth=5, max_features=sqrt, max_leaf_nodes=68,min_samples_split=10, random_state=324298066)
+	if( d <= 6.02549 )
+		if( tci <= 208.389 )
+			if( esa <= 49.4731 )
+				if( ci_wt2 <= 40.5855 )
+					ret := 0.625000
+				if( ci_wt2 > 40.5855 )
+					ret := 1.000000
+			if( esa > 49.4731 )
+				if( ci <= -48.123 )
+					if( esa <= 95.9102 )
+						ret := -0.584906
+					if( esa > 95.9102 )
+						ret := -0.117021
+				if( ci > -48.123 )
+					if( d_tci <= 46.2092 )
+						ret := 0.064593
+					if( d_tci > 46.2092 )
+						ret := -0.600000
+		if( tci > 208.389 )
+			ret := -1.000000
+	if( d > 6.02549 )
+		if( esa <= 208.889 )
+			if( ap <= 175.205 )
+				if( tci <= 12.7494 )
+					if( ap <= 123.482 )
+						ret := 0.357143
+					if( ap > 123.482 )
+						ret := 0.737500
+				if( tci > 12.7494 )
+					if( tci <= 19.0112 )
+						ret := -1.000000
+					if( tci > 19.0112 )
+						ret := 0.047619
+			if( ap > 175.205 )
+				if( tci <= 25.8833 )
+					if( d <= 7.71384 )
+						ret := 0.285714
+					if( d > 7.71384 )
+						ret := -0.380952
+				if( tci > 25.8833 )
+					if( d_tci <= -52.7899 )
+						ret := -0.750000
+					if( d_tci > -52.7899 )
+						ret := 0.512195
+		if( esa > 208.889 )
+			if( tci <= 2.56981 )
+				if( tci <= -30.2958 )
+					if( tci <= -40.4387 )
+
+	...
+The rest of this Pine script is part of the paid version. Visit the website for more info.

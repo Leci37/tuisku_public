@@ -1,0 +1,62 @@
+//Welcome to © Tuisku Trading Strategy, a sophisticated and optimised solution created by the experienced team at Tuisku.eu. Our team of experts specialise in random forest AI, harnessing its powerful capabilities to improve trading performance.
+//Tuisku's commitment to quality and innovation shines through in every aspect of this strategy.
+
+// Training model statistics: Dates 2017-03-02 to 2024-08-12. Correct positive entries: 62.5% (258/413) . Correct operations (positive and negative) 57.7% (292/506) .
+// Technical base pattern: Williams_Vix_Fix
+// ID_model: SNAP_1d_1WIL_f5c752ab Date Creation: 2024/08/30 Recommended expiry date : 2025/04/30
+//@version=5
+strategy("Tuisku_SNAP_1d_1WIL_f5c752ab", overlay=true, margin_long=1000, margin_short=1000, pyramiding=5)
+//RANDOM FOREST AI 
+decision_tree_0_SNAP_1d_f5c752ab(lowerBand, upperBand, wvf, rangeLow, Color_con2, sDev, Color_con1, midLine, rangeHigh, colInt)=>
+	var float ret = 0  // # DecisionTreeRegressor(max_depth=5, max_features=0.65, max_leaf_nodes=122,min_samples_leaf=5, min_samples_split=6,random_state=1467416007)
+	if( lowerBand <= 0.433337 )
+		if( Color_con2 <= -3.49153 )
+			if( Color_con1 <= -20.8355 )
+				if( lowerBand <= -5.28808 )
+					if( Color_con2 <= -29.6864 )
+						ret := 0.656250
+					if( Color_con2 > -29.6864 )
+						ret := -0.256410
+				if( lowerBand > -5.28808 )
+					if( upperBand <= 33.2798 )
+						ret := 0.060606
+					if( upperBand > 33.2798 )
+						ret := -0.459016
+			if( Color_con1 > -20.8355 )
+				if( upperBand <= 6.02235 )
+					if( upperBand <= 4.50915 )
+						ret := 0.000000
+					if( upperBand > 4.50915 )
+						ret := 0.923077
+				if( upperBand > 6.02235 )
+					if( Color_con1 <= -12.2489 )
+						ret := 0.534031
+					if( Color_con1 > -12.2489 )
+						ret := 0.237430
+		if( Color_con2 > -3.49153 )
+			if( Color_con1 <= -1.65905 )
+				if( upperBand <= 14.0536 )
+					if( sDev <= 4.39497 )
+						ret := -0.187500
+					if( sDev > 4.39497 )
+						ret := 0.320000
+				if( upperBand > 14.0536 )
+					if( wvf <= 26.3648 )
+						ret := -0.718182
+					if( wvf > 26.3648 )
+						ret := -0.038462
+			if( Color_con1 > -1.65905 )
+				if( wvf <= 7.55212 )
+					if( Color_con1 <= -0.068416 )
+						ret := -0.900000
+					if( Color_con1 > -0.068416 )
+						ret := 0.000000
+				if( wvf > 7.55212 )
+					if( Color_con2 <= 17.5064 )
+						ret := 0.711111
+					if( Color_con2 > 17.5064 )
+						ret := 0.000000
+	if( lowerBand > 0.433337 )
+
+	...
+The rest of this Pine script is part of the paid version. Visit the website for more info.

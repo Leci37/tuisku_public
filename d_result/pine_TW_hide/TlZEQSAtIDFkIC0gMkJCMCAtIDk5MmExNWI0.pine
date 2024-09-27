@@ -1,0 +1,62 @@
+//Welcome to © Tuisku Trading Strategy, a sophisticated and optimised solution created by the experienced team at Tuisku.eu. Our team of experts specialise in random forest AI, harnessing its powerful capabilities to improve trading performance.
+//Tuisku's commitment to quality and innovation shines through in every aspect of this strategy.
+
+// Training model statistics: Dates 2015-01-02 to 2024-08-12. Correct positive entries: 71.2% (401/563) . Correct operations (positive and negative) 64.1% (431/672) .
+// Technical base pattern: L_Bollinger_Bands, L_Bull_Bear_Power
+// ID_model: NVDA_1d_2BB0_992a15b4 Date Creation: 2024/08/30 Recommended expiry date : 2025/04/30
+//@version=5
+strategy("Tuisku_NVDA_1d_2BB0_992a15b4", overlay=true, margin_long=1000, margin_short=1000, pyramiding=5)
+//RANDOM FOREST AI 
+decision_tree_0_NVDA_1d_992a15b4(basis, Upper_Band, Lower_Band, bearPower, bbp, bbm, bullPower)=>
+	var float ret = 0  // # DecisionTreeRegressor(criterion=friedman_mse, max_depth=5, max_features=0.675,max_leaf_nodes=68, min_samples_leaf=2,min_samples_split=6, random_state=893104820)
+	if( bearPower <= -0.101675 )
+		if( basis <= 16.1785 )
+			if( Upper_Band <= 6.36776 )
+				if( basis <= 4.2002 )
+					if( bbm <= 0.137855 )
+						ret := 0.511628
+					if( bbm > 0.137855 )
+						ret := -0.219512
+				if( basis > 4.2002 )
+					if( bearPower <= -0.379345 )
+						ret := 0.142857
+					if( bearPower > -0.379345 )
+						ret := -0.769231
+			if( Upper_Band > 6.36776 )
+				if( basis <= 6.34266 )
+					if( Upper_Band <= 6.48877 )
+						ret := 0.142857
+					if( Upper_Band > 6.48877 )
+						ret := 0.925000
+				if( basis > 6.34266 )
+					if( Upper_Band <= 7.81136 )
+						ret := -0.636364
+					if( Upper_Band > 7.81136 )
+						ret := 0.236994
+		if( basis > 16.1785 )
+			if( Lower_Band <= 18.0669 )
+				if( bearPower <= -1.00743 )
+					if( basis <= 17.7687 )
+						ret := 0.133333
+					if( basis > 17.7687 )
+						ret := -0.622222
+				if( bearPower > -1.00743 )
+					if( bullPower <= 0.416757 )
+						ret := -0.924528
+					if( bullPower > 0.416757 )
+						ret := -1.000000
+			if( Lower_Band > 18.0669 )
+				if( basis <= 24.3147 )
+					if( bearPower <= -0.13734 )
+						ret := 0.610169
+					if( bearPower > -0.13734 )
+						ret := -1.000000
+				if( basis > 24.3147 )
+					if( Upper_Band <= 34.1485 )
+						ret := -0.611111
+					if( Upper_Band > 34.1485 )
+						ret := -0.087838
+	if( bearPower > -0.101675 )
+
+	...
+The rest of this Pine script is part of the paid version. Visit the website for more info.

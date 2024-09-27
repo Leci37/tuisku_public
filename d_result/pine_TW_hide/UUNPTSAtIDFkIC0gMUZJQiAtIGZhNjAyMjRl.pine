@@ -1,0 +1,62 @@
+//Welcome to © Tuisku Trading Strategy, a sophisticated and optimised solution created by the experienced team at Tuisku.eu. Our team of experts specialise in random forest AI, harnessing its powerful capabilities to improve trading performance.
+//Tuisku's commitment to quality and innovation shines through in every aspect of this strategy.
+
+// Training model statistics: Dates 2015-01-02 to 2024-08-12. Correct positive entries: 69.5% (362/521) . Correct operations (positive and negative) 64.6% (402/622) .
+// Technical base pattern: Fibonacci_Bollinger
+// ID_model: QCOM_1d_1FIB_fa60224e Date Creation: 2024/08/30 Recommended expiry date : 2025/04/30
+//@version=5
+strategy("Tuisku_QCOM_1d_1FIB_fa60224e", overlay=true, margin_long=1000, margin_short=1000, pyramiding=5)
+//RANDOM FOREST AI 
+decision_tree_0_QCOM_1d_fa60224e(lower_4, upper_2, basis_max, upper_3, basis, lower_2, lower_3, upper_1, lower_1, upper_6, lower_5, basis_minus, lower_6, upper_4, upper_5)=>
+	var float ret = 0  // # DecisionTreeRegressor(max_depth=5, max_features=0.5, max_leaf_nodes=68,min_samples_leaf=5, min_samples_split=10,random_state=1101173852)
+	if( lower_1 <= 140.327 )
+		if( basis_max <= -19.048 )
+			if( upper_3 <= 129.476 )
+				if( lower_3 <= 49.537 )
+					if( lower_6 <= 32.8568 )
+						ret := 0.688889
+					if( lower_6 > 32.8568 )
+						ret := -0.370370
+				if( lower_3 > 49.537 )
+					if( upper_6 <= 101.91 )
+						ret := 0.165714
+					if( upper_6 > 101.91 )
+						ret := 0.503145
+			if( upper_3 > 129.476 )
+				if( upper_4 <= 173.8 )
+					if( upper_6 <= 195.423 )
+						ret := -0.034483
+					if( upper_6 > 195.423 )
+						ret := -0.746269
+				if( upper_4 > 173.8 )
+					if( basis <= 142.673 )
+						ret := 0.930233
+					if( basis > 142.673 )
+						ret := 0.057554
+		if( basis_max > -19.048 )
+			if( upper_2 <= 58.8853 )
+				if( upper_6 <= 62.6432 )
+					if( lower_4 <= 44.1195 )
+						ret := 1.000000
+					if( lower_4 > 44.1195 )
+						ret := 0.875000
+				if( upper_6 > 62.6432 )
+					if( upper_6 <= 65.9142 )
+						ret := 0.046512
+					if( upper_6 > 65.9142 )
+						ret := 0.612903
+			if( upper_2 > 58.8853 )
+				if( upper_6 <= 81.0116 )
+					if( lower_4 <= 49.286 )
+						ret := -0.405983
+					if( lower_4 > 49.286 )
+						ret := 0.190840
+				if( upper_6 > 81.0116 )
+					if( lower_1 <= 58.3866 )
+						ret := -1.000000
+					if( lower_1 > 58.3866 )
+						ret := -0.607143
+	if( lower_1 > 140.327 )
+
+	...
+The rest of this Pine script is part of the paid version. Visit the website for more info.

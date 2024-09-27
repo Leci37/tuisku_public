@@ -1,0 +1,62 @@
+//Welcome to © Tuisku Trading Strategy, a sophisticated and optimised solution created by the experienced team at Tuisku.eu. Our team of experts specialise in random forest AI, harnessing its powerful capabilities to improve trading performance.
+//Tuisku's commitment to quality and innovation shines through in every aspect of this strategy.
+
+// Training model statistics: Dates 2015-01-02 to 2024-08-12. Correct positive entries: 77.6% (443/571) . Correct operations (positive and negative) 68.8% (465/676) .
+// Technical base pattern: Wave_Trend_Calculation
+// ID_model: EPAM_1d_1WAV_4bf6752e Date Creation: 2024/08/30 Recommended expiry date : 2025/04/30
+//@version=5
+strategy("Tuisku_EPAM_1d_1WAV_4bf6752e", overlay=true, margin_long=1000, margin_short=1000, pyramiding=5)
+//RANDOM FOREST AI 
+decision_tree_0_EPAM_1d_4bf6752e(tci, ap, ci_wt2, wt2, ci, d_tci, d, esa)=>
+	var float ret = 0  // # DecisionTreeRegressor(max_depth=5, max_features=0.5, max_leaf_nodes=68,min_samples_leaf=5, random_state=1685361203)
+	if( d <= 28.7961 )
+		if( ci <= -27.4762 )
+			if( ci_wt2 <= -51.0286 )
+				if( ap <= 325.571 )
+					if( d <= 7.42999 )
+						ret := -0.017301
+					if( d > 7.42999 )
+						ret := 0.637681
+				if( ap > 325.571 )
+					if( ci <= -90.3859 )
+						ret := -0.714286
+					if( ci > -90.3859 )
+						ret := -0.016393
+			if( ci_wt2 > -51.0286 )
+				if( wt2 <= -23.707 )
+					if( ap <= 63.5283 )
+						ret := 0.863636
+					if( ap > 63.5283 )
+						ret := 0.122642
+				if( wt2 > -23.707 )
+					if( esa <= 69.1492 )
+						ret := 0.090909
+					if( esa > 69.1492 )
+						ret := 0.696203
+		if( ci > -27.4762 )
+			if( ap <= 65.2269 )
+				if( wt2 <= 57.3705 )
+					if( ci <= 107.469 )
+						ret := 0.819672
+					if( ci > 107.469 )
+						ret := 0.000000
+				if( wt2 > 57.3705 )
+					ret := 0.000000
+			if( ap > 65.2269 )
+				if( d <= 7.2178 )
+					if( d <= 2.66498 )
+						ret := -0.130261
+					if( d > 2.66498 )
+						ret := 0.123377
+				if( d > 7.2178 )
+					if( wt2 <= 27.0709 )
+						ret := -0.534296
+					if( wt2 > 27.0709 )
+						ret := 0.208589
+	if( d > 28.7961 )
+		if( esa <= 258.915 )
+			ret := 1.000000
+		if( esa > 258.915 )
+
+	...
+The rest of this Pine script is part of the paid version. Visit the website for more info.

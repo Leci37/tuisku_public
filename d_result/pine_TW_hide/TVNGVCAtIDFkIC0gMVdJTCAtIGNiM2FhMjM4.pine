@@ -1,0 +1,62 @@
+//Welcome to © Tuisku Trading Strategy, a sophisticated and optimised solution created by the experienced team at Tuisku.eu. Our team of experts specialise in random forest AI, harnessing its powerful capabilities to improve trading performance.
+//Tuisku's commitment to quality and innovation shines through in every aspect of this strategy.
+
+// Training model statistics: Dates 2015-01-02 to 2024-08-12. Correct positive entries: 78.4% (428/546) . Correct operations (positive and negative) 69.3% (456/658) .
+// Technical base pattern: Williams_Vix_Fix
+// ID_model: MSFT_1d_1WIL_cb3aa238 Date Creation: 2024/08/30 Recommended expiry date : 2025/04/30
+//@version=5
+strategy("Tuisku_MSFT_1d_1WIL_cb3aa238", overlay=true, margin_long=1000, margin_short=1000, pyramiding=5)
+//RANDOM FOREST AI 
+decision_tree_0_MSFT_1d_cb3aa238(upperBand, sDev, lowerBand, rangeLow, Color_con1, wvf, rangeHigh, colInt, Color_con2, midLine)=>
+	var float ret = 0  // # DecisionTreeRegressor(criterion=friedman_mse, max_depth=5, max_features=0.675,max_leaf_nodes=68, random_state=327383783)
+	if( wvf <= 5.41879 )
+		if( midLine <= 7.25955 )
+			if( midLine <= 4.35416 )
+				if( wvf <= 1.09815 )
+					if( Color_con2 <= -2.0103 )
+						ret := 0.072165
+					if( Color_con2 > -2.0103 )
+						ret := 0.305882
+				if( wvf > 1.09815 )
+					if( sDev <= 1.95314 )
+						ret := 0.029289
+					if( sDev > 1.95314 )
+						ret := -0.230533
+			if( midLine > 4.35416 )
+				if( lowerBand <= -2.5628 )
+					if( midLine <= 5.49239 )
+						ret := -0.615385
+					if( midLine > 5.49239 )
+						ret := -0.142857
+				if( lowerBand > -2.5628 )
+					if( upperBand <= 11.7499 )
+						ret := 0.278810
+					if( upperBand > 11.7499 )
+						ret := 0.632653
+		if( midLine > 7.25955 )
+			if( Color_con1 <= -29.2383 )
+				ret := 1.000000
+			if( Color_con1 > -29.2383 )
+				if( wvf <= 5.16751 )
+					if( lowerBand <= 0.826706 )
+						ret := -0.222222
+					if( lowerBand > 0.826706 )
+						ret := -0.814570
+				if( wvf > 5.16751 )
+					if( sDev <= 5.00631 )
+						ret := 0.000000
+					if( sDev > 5.00631 )
+						ret := 0.666667
+	if( wvf > 5.41879 )
+		if( upperBand <= 14.7262 )
+			if( lowerBand <= -0.012311 )
+				if( midLine <= 3.8867 )
+					if( colInt <= 0.5 )
+						ret := -0.581395
+					if( colInt > 0.5 )
+						ret := 0.110599
+				if( midLine > 3.8867 )
+					if( sDev <= 6.17628 )
+
+	...
+The rest of this Pine script is part of the paid version. Visit the website for more info.

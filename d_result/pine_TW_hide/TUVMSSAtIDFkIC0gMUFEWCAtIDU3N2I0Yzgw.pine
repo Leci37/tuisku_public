@@ -1,0 +1,62 @@
+//Welcome to © Tuisku Trading Strategy, a sophisticated and optimised solution created by the experienced team at Tuisku.eu. Our team of experts specialise in random forest AI, harnessing its powerful capabilities to improve trading performance.
+//Tuisku's commitment to quality and innovation shines through in every aspect of this strategy.
+
+// Training model statistics: Dates 2015-01-02 to 2024-08-12. Correct positive entries: 73.5% (425/578) . Correct operations (positive and negative) 66.8% (452/677) .
+// Technical base pattern: ADX_and_DI
+// ID_model: MELI_1d_1ADX_577b4c80 Date Creation: 2024/08/30 Recommended expiry date : 2025/04/30
+//@version=5
+strategy("Tuisku_MELI_1d_1ADX_577b4c80", overlay=true, margin_long=1000, margin_short=1000, pyramiding=5)
+//RANDOM FOREST AI 
+decision_tree_0_MELI_1d_577b4c80(smoothedDirectionalMovementMinus, smoothedTrueRange, diPlus, adx, directionalMovementPlus, directionalMovementMinus, diMinus, smoothedDirectionalMovementPlus, dx, trueRange)=>
+	var float ret = 0  // # DecisionTreeRegressor(max_depth=5, max_features=0.675, max_leaf_nodes=32,min_samples_leaf=9, min_samples_split=16,random_state=1622011030)
+	if( smoothedTrueRange <= 56.6845 )
+		if( smoothedDirectionalMovementMinus <= 3.87433 )
+			if( smoothedDirectionalMovementMinus <= 0.629178 )
+				if( diPlus <= 39.8354 )
+					if( smoothedTrueRange <= 4.55586 )
+						ret := 0.264000
+					if( smoothedTrueRange > 4.55586 )
+						ret := 0.816327
+				if( diPlus > 39.8354 )
+					if( smoothedTrueRange <= 8.88536 )
+						ret := 0.000000
+					if( smoothedTrueRange > 8.88536 )
+						ret := -0.785714
+			if( smoothedDirectionalMovementMinus > 0.629178 )
+				if( adx <= 25.3095 )
+					if( smoothedDirectionalMovementMinus <= 2.82508 )
+						ret := 0.406780
+					if( smoothedDirectionalMovementMinus > 2.82508 )
+						ret := -0.213115
+				if( adx > 25.3095 )
+					if( dx <= 60.7029 )
+						ret := -0.331933
+					if( dx > 60.7029 )
+						ret := 0.207207
+		if( smoothedDirectionalMovementMinus > 3.87433 )
+			if( smoothedTrueRange <= 45.6507 )
+				if( dx <= 47.5368 )
+					if( directionalMovementPlus <= 9.08639 )
+						ret := 0.045603
+					if( directionalMovementPlus > 9.08639 )
+						ret := 0.556250
+				if( dx > 47.5368 )
+					if( adx <= 56.5257 )
+						ret := 0.606838
+					if( adx > 56.5257 )
+						ret := 0.000000
+			if( smoothedTrueRange > 45.6507 )
+				if( smoothedDirectionalMovementMinus <= 17.2349 )
+					if( adx <= 15.913 )
+						ret := 0.733333
+					if( adx > 15.913 )
+						ret := -0.031373
+				if( smoothedDirectionalMovementMinus > 17.2349 )
+					if( smoothedTrueRange <= 50.5581 )
+						ret := -0.944444
+					if( smoothedTrueRange > 50.5581 )
+						ret := -0.307692
+	if( smoothedTrueRange > 56.6845 )
+
+	...
+The rest of this Pine script is part of the paid version. Visit the website for more info.

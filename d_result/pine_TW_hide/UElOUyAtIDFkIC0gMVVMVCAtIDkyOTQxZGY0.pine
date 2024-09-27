@@ -1,0 +1,62 @@
+//Welcome to © Tuisku Trading Strategy, a sophisticated and optimised solution created by the experienced team at Tuisku.eu. Our team of experts specialise in random forest AI, harnessing its powerful capabilities to improve trading performance.
+//Tuisku's commitment to quality and innovation shines through in every aspect of this strategy.
+
+// Training model statistics: Dates 2019-04-18 to 2024-08-12. Correct positive entries: 69.5% (210/302) . Correct operations (positive and negative) 62.6% (226/361) .
+// Technical base pattern: Ultimate_MA_MTF_V2
+// ID_model: PINS_1d_1ULT_92941df4 Date Creation: 2024/08/30 Recommended expiry date : 2025/04/30
+//@version=5
+strategy("Tuisku_PINS_1d_1ULT_92941df4", overlay=true, margin_long=1000, margin_short=1000, pyramiding=5)
+//RANDOM FOREST AI 
+decision_tree_0_PINS_1d_92941df4(ma_upInt, cr_upInt, cr_downInt, ma_downInt, cr_up2Int, cr_down2Int, avg, avg2)=>
+	var float ret = 0  // # DecisionTreeRegressor(criterion=friedman_mse, max_depth=5, max_features=0.6,max_leaf_nodes=122, min_samples_leaf=2,random_state=234021182)
+	if( avg <= 19.4767 )
+		if( avg2 <= 16.8857 )
+			if( avg <= 18.997 )
+				if( avg <= 18.6745 )
+					ret := -1.000000
+				if( avg > 18.6745 )
+					if( avg <= 18.7938 )
+						ret := -0.500000
+					if( avg > 18.7938 )
+						ret := -1.000000
+			if( avg > 18.997 )
+				if( avg2 <= 16.7156 )
+					ret := 0.000000
+				if( avg2 > 16.7156 )
+					ret := 0.500000
+		if( avg2 > 16.8857 )
+			if( avg <= 19.2538 )
+				if( cr_upInt <= 0.5 )
+					if( avg2 <= 17.0919 )
+						ret := 0.250000
+					if( avg2 > 17.0919 )
+						ret := 0.761589
+				if( cr_upInt > 0.5 )
+					ret := -0.333333
+			if( avg > 19.2538 )
+				if( ma_upInt <= 0.5 )
+					if( avg2 <= 22.0665 )
+						ret := 0.941176
+					if( avg2 > 22.0665 )
+						ret := 0.000000
+				if( ma_upInt > 0.5 )
+					if( cr_upInt <= 0.5 )
+						ret := -0.466667
+					if( cr_upInt > 0.5 )
+						ret := 1.000000
+	if( avg > 19.4767 )
+		if( ma_downInt <= 0.5 )
+			if( avg <= 73.5004 )
+				if( avg2 <= 68.918 )
+					if( cr_downInt <= 0.5 )
+						ret := 0.065409
+					if( cr_downInt > 0.5 )
+						ret := -0.269231
+				if( avg2 > 68.918 )
+					if( avg <= 72.7808 )
+						ret := 0.885714
+					if( avg > 72.7808 )
+						ret := 1.000000
+
+	...
+The rest of this Pine script is part of the paid version. Visit the website for more info.

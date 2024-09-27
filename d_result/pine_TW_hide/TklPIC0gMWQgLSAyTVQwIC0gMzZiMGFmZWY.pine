@@ -1,0 +1,62 @@
+//Welcome to © Tuisku Trading Strategy, a sophisticated and optimised solution created by the experienced team at Tuisku.eu. Our team of experts specialise in random forest AI, harnessing its powerful capabilities to improve trading performance.
+//Tuisku's commitment to quality and innovation shines through in every aspect of this strategy.
+
+// Training model statistics: Dates 2018-09-12 to 2024-08-12. Correct positive entries: 71.7% (241/336) . Correct operations (positive and negative) 65.0% (269/414) .
+// Technical base pattern: L_Money_Flow_Index, L_Triple_EMA
+// ID_model: NIO_1d_2MT0_36b0afef Date Creation: 2024/08/30 Recommended expiry date : 2025/04/30
+//@version=5
+strategy("Tuisku_NIO_1d_2MT0_36b0afef", overlay=true, margin_long=1000, margin_short=1000, pyramiding=5)
+//RANDOM FOREST AI 
+decision_tree_0_NIO_1d_36b0afef(Negative_Money_Flow_Sum, Positive_Money_Flow_Sum, MFI, Raw_Money_Flow, MFI_Low, Negative_Money_Flow, Money_Flow_Ratio, Typical_Price, MFI_High, Positive_Money_Flow, ema2, ema12, ema1, ema13, tema, ema3)=>
+	var float ret = 0  // # DecisionTreeRegressor(max_depth=5, max_features=0.625, max_leaf_nodes=68,min_samples_leaf=9, min_samples_split=16,random_state=1043157787)
+	if( ema3 <= 2.94668 )
+		if( ema12 <= 0.080672 )
+			if( ema13 <= -0.377597 )
+				ret := 0.000000
+			if( ema13 > -0.377597 )
+				if( ema3 <= 1.79285 )
+					ret := 0.666667
+				if( ema3 > 1.79285 )
+					if( Positive_Money_Flow_Sum <= 8.1984e+08 )
+						ret := 1.000000
+					if( Positive_Money_Flow_Sum > 8.1984e+08 )
+						ret := 0.777778
+		if( ema12 > 0.080672 )
+			if( Negative_Money_Flow_Sum <= 9.41405e+08 )
+				if( Positive_Money_Flow_Sum <= 7.40911e+08 )
+					ret := -0.555556
+				if( Positive_Money_Flow_Sum > 7.40911e+08 )
+					ret := 0.117647
+			if( Negative_Money_Flow_Sum > 9.41405e+08 )
+				ret := 1.000000
+	if( ema3 > 2.94668 )
+		if( Typical_Price <= 21.6619 )
+			if( Positive_Money_Flow_Sum <= 5.39884e+09 )
+				if( ema12 <= 0.243149 )
+					if( MFI_High <= -51.8954 )
+						ret := -0.405405
+					if( MFI_High > -51.8954 )
+						ret := 0.036585
+				if( ema12 > 0.243149 )
+					if( Negative_Money_Flow_Sum <= 7.19267e+08 )
+						ret := -0.411765
+					if( Negative_Money_Flow_Sum > 7.19267e+08 )
+						ret := -0.814815
+			if( Positive_Money_Flow_Sum > 5.39884e+09 )
+				if( ema12 <= 1.05187 )
+					if( MFI <= 68.9074 )
+						ret := 0.247126
+					if( MFI > 68.9074 )
+						ret := 0.711864
+				if( ema12 > 1.05187 )
+					if( tema <= 15.238 )
+						ret := 0.111111
+					if( tema > 15.238 )
+						ret := -0.875000
+		if( Typical_Price > 21.6619 )
+			if( Negative_Money_Flow_Sum <= 1.39361e+10 )
+				if( Negative_Money_Flow_Sum <= 1.28443e+10 )
+					if( ema3 <= 30.89 )
+
+	...
+The rest of this Pine script is part of the paid version. Visit the website for more info.

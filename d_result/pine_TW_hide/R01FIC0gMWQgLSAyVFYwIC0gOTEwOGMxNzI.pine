@@ -1,0 +1,62 @@
+//Welcome to © Tuisku Trading Strategy, a sophisticated and optimised solution created by the experienced team at Tuisku.eu. Our team of experts specialise in random forest AI, harnessing its powerful capabilities to improve trading performance.
+//Tuisku's commitment to quality and innovation shines through in every aspect of this strategy.
+
+// Training model statistics: Dates 2015-01-02 to 2024-08-12. Correct positive entries: 78.1% (441/565) . Correct operations (positive and negative) 69.7% (470/674) .
+// Technical base pattern: L_Triple_EMA, L_Vortex_Indicator
+// ID_model: GME_1d_2TV0_9108c172 Date Creation: 2024/08/30 Recommended expiry date : 2025/04/30
+//@version=5
+strategy("Tuisku_GME_1d_2TV0_9108c172", overlay=true, margin_long=1000, margin_short=1000, pyramiding=5)
+//RANDOM FOREST AI 
+decision_tree_0_GME_1d_9108c172(ema2, ema12, ema1, ema13, tema, ema3, VIP, VIP_VIM, VIM)=>
+	var float ret = 0  // # DecisionTreeRegressor(criterion=friedman_mse, max_depth=5, max_features=0.6,max_leaf_nodes=68, min_samples_leaf=9,min_samples_split=10, random_state=969822195)
+	if( ema1 <= 26.3687 )
+		if( ema3 <= 18.52 )
+			if( ema1 <= 0.9743 )
+				if( ema2 <= 0.952103 )
+					if( ema2 <= 0.902954 )
+						ret := 0.888889
+					if( ema2 > 0.902954 )
+						ret := 1.000000
+				if( ema2 > 0.952103 )
+					ret := 0.625000
+			if( ema1 > 0.9743 )
+				if( ema3 <= 15.9509 )
+					if( ema12 <= 0.44632 )
+						ret := -0.034790
+					if( ema12 > 0.44632 )
+						ret := 0.882353
+				if( ema3 > 15.9509 )
+					if( ema3 <= 18.0451 )
+						ret := -0.782609
+					if( ema3 > 18.0451 )
+						ret := 0.000000
+		if( ema3 > 18.52 )
+			if( ema1 <= 18.1787 )
+				if( tema <= 16.6103 )
+					ret := 1.000000
+				if( tema > 16.6103 )
+					ret := 0.777778
+			if( ema1 > 18.1787 )
+				if( tema <= 18.2568 )
+					ret := -0.416667
+				if( tema > 18.2568 )
+					if( ema3 <= 26.9748 )
+						ret := 0.243590
+					if( ema3 > 26.9748 )
+						ret := 0.935484
+	if( ema1 > 26.3687 )
+		if( tema <= 31.1212 )
+			if( ema13 <= -5.65116 )
+				ret := 1.000000
+			if( ema13 > -5.65116 )
+				if( ema1 <= 26.5234 )
+					ret := -0.555556
+				if( ema1 > 26.5234 )
+					if( ema2 <= 33.6624 )
+						ret := -0.827586
+					if( ema2 > 33.6624 )
+						ret := -1.000000
+		if( tema > 31.1212 )
+
+	...
+The rest of this Pine script is part of the paid version. Visit the website for more info.
