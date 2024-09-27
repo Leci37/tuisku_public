@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You for Your Purchase</title>
+    <script src="w_utils.js"></script>
+    <link rel="stylesheet" href="w_thankyou.css">
+      <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="thankyou-container">
+        <div class="header-logo">
+            <img src="d_result/icons/_logo_tuisku_azulLetras.png" alt="Tuisku Logo" class="thankyou-logo">
+        </div>
+        <h2>Thank You for Your Buy!</h2>
+        <p>Your transaction has been successfully completed.</p>
+
+        <!-- Order Summary from simpleCart.js -->
+        <div class="order-summary">
+            <h3 style="margin-left:0em;">Downloads Strategies</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Download</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Interval</th>
+                        <th>Net Profit (USD)</th>
+                        <th>Indicators Name</th> <!-- New column -->
+                        <th>Key Techs</th>
+                        <th>Index</th>
+                        <th>Ticker</th>
+                        <th>Win Rate (%)</th>
+                        <th>Closed Trades</th>
+                        <th>Release Date</th>
+                        <th>Months Trained</th>
+                        <th>Qty</th>
+                        <th>SubTotal</th>
+                    </tr>
+                </thead>
+                <tbody id="cart-items">
+                    <!-- Cart items will be dynamically inserted here -->
+                </tbody>
+            </table>
+                <div style="display: inline-flex; align-items: center;margin-top:1em;" >
+                <button id="download-all-btn" onclick="downloadAllFiles()" style="background-color: #019cdf; color: white;font-size:0.95em; font-weight: bold; cursor: pointer; padding: 10px 20px; border: none; border-radius: 5px; margin-right: 5em; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);">
+                    Download All
+                </button>
+                    <h3  style="margin-right: 3em;" >Total Amount: $<span id="total-amount"></span></h3>
+                    <p>Number of Items: <span id="item-quantity"></span></p>
+                </div>
+
+
+                <!-- Copy Info Section -->
+    <p>If you have any problems, please contact <strong>sales@tuisku.eu</strong>
+        <span id="copy-info" style="cursor: pointer; color: #3BD7C8;" onclick="copyToClipboard()">
+            <i class="fa-solid fa-copy"></i> Copy and paste this info
+        </span>
+    </p>
+
+        </div>
+
+        <!-- Payment Information -->
+        <div class="payment-info">
+    <div class="payment-header">
+        <h3>Payment Information </h3>
+        <img src="d_result/icons/_logo_paypal.png" alt="PayPal Logo" class="paypal-logo">
+    </div>
+            <p><strong>Order ID:</strong> <span id="order-id"></span></p>
+            <p><strong>Payer ID:</strong> <span id="payer-id"></span></p>
+            <p><strong>Payment Source:</strong> <span id="payment-source"></span></p>
+            <p><strong>Payment ID:</strong> <span id="payment-id"></span></p>
+            <p><strong>Facilitator Access Token:</strong> <span id="access-token"></span></p>
+        </div>
+    </div>
+
+    <script src="simpleCart.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById('total-amount').textContent = simpleCart.grandTotal().toFixed(2);
+            document.getElementById('item-quantity').textContent = simpleCart.quantity();
+
+            let cartItems = simpleCart.items();
+            let cartTableBody = document.getElementById('cart-items');
+
+            cartItems.forEach(function(item) {
+                let row = document.createElement('tr');
+
+                var decode = item.get('name');
+                var decode_B = encodeKey(decodeKey_B(decode));
+                var url_buy = "d_result/pine_TW_b/" + decode_B + ".pine";
+
+                row.innerHTML = `
+<td>
+    <a href="javascript:void(0);" style="color: #3BD7C8; font-weight: bold; cursor: pointer;" onclick="downloadFile('${url_buy}', '${decodeKey(item.get('name')).replaceAll(' - ', '_')}')">
+        <i class="fa-solid fa-file-arrow-down" style="color: #3BD7C8; font-size: 1.35em; font-weight: bold;"></i>
+    </a>
+    &nbsp&nbsp
+    <a href="javascript:void(0);" style="color: #3BD7C8; font-weight: bold; cursor: pointer;" onclick="downloadFile('${url_buy}', '${decodeKey(item.get('name')).replaceAll(' - ', '_')}')">Download</a>
+    <a href="javascript:void(0);" onclick="downloadFile('${url_buy}', '${decodeKey(item.get('name')).replaceAll(' - ', '_')}')">${decodeKey(item.get('name')).replaceAll(' - ', '_')}</a>
+</td>
+                    <td>${item.get('name-name')} <img src="${item.get('path-ico')}" style="width:1em;height:1em;"></td>
+                    <td>$${parseFloat(item.get('price')).toFixed(2)}</td> <!-- Format as currency -->
+                    <td>${item.get('interval')}</td>
+                    <td>$${parseFloat(item.get('net-profit-usd') || 0).toFixed(2)}</td> <!-- Ensure it is a number and format as currency -->
+                    <td>${item.get('indicator-name')}</td>
+                    <td>${item.get('key-techs')}</td>
+                    <td>${item.get('index')}</td>
+                    <td>${item.get('ticker')}</td>
+                    <td>${parseFloat(item.get('win-rate-per') || 0).toFixed(2)}%</td> <!-- Format as percentage -->
+                    <td>${item.get('total-closed-trades')}</td>
+                    <td>${item.get('release-date')}</td>
+                    <td>${item.get('months-trained')}</td>
+                    <td>${item.quantity()}</td>
+                    <td>$${parseFloat(item.total()).toFixed(2)}</td> <!-- Format as currency -->
+                `;
+
+                cartTableBody.appendChild(row);
+            });
+
+            const paymentData = JSON.parse(sessionStorage.getItem('paymentData'));
+            if (paymentData) {
+                document.getElementById('order-id').textContent = paymentData.orderID;
+                document.getElementById('payer-id').textContent = paymentData.payerID;
+                document.getElementById('payment-source').textContent = paymentData.paymentSource;
+                document.getElementById('payment-id').textContent = paymentData.paymentID;
+                document.getElementById('access-token').textContent = paymentData.facilitatorAccessToken;
+            } else {
+                document.querySelector('.payment-info').innerHTML = '<p>No payment information available.</p>';
+            }
+        });
+
+function downloadFile(url, fileName) {
+    // Create an invisible anchor element
+    const a = document.createElement('a');
+    a.style.display = 'none';
+
+    // Set the href to the file URL and set the download attribute to the custom file name
+    a.href = url;
+    a.download = fileName + '_TW.pine'; // Add the .pine extension to the custom name
+
+    // Append it to the document body and trigger the download
+    document.body.appendChild(a);
+    a.click();
+
+    // Remove the anchor element after the download
+    document.body.removeChild(a);
+}
+
+function downloadAllFiles() {
+    // Get the first 'a' tag from each 'td' in the Download column (one per row)
+    const downloadLinks = document.querySelectorAll('#cart-items td:first-child a:first-of-type');
+
+    // Loop through each link and trigger the download
+    downloadLinks.forEach(link => {
+        const url = link.getAttribute('onclick').match(/'(.*?)'/)[1]; // Extract URL from onclick
+        const fileName = link.getAttribute('onclick').match(/'(.*?)'/g)[1].replace(/'/g, ''); // Extract file name
+
+        // Trigger the download using the downloadFile function
+        downloadFile(url, fileName);
+    });
+}
+
+function copyToClipboard() {
+    // Get all the download information from the table
+    let downloadInfo = "";
+    const downloadCells = document.querySelectorAll('#cart-items td:first-child');
+
+    downloadCells.forEach(cell => {
+        downloadInfo += cell.textContent.trim() + "\n";
+    });
+
+    // Get the payment information
+    const paymentInfo = document.querySelector('.payment-info').textContent.trim();
+
+    // Combine both the download and payment information
+    const infoToCopy = `Download Info:\n${downloadInfo}\n\nPayment Info:\n${paymentInfo}`;
+
+    // Copy the combined text to the clipboard
+    const tempTextArea = document.createElement('textarea');
+    tempTextArea.value = infoToCopy;
+    document.body.appendChild(tempTextArea);
+    tempTextArea.select();
+    document.execCommand('copy');
+    document.body.removeChild(tempTextArea);
+
+    // Provide feedback to the user
+    alert("Information copied to clipboard!");
+}
+    </script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+*{
+    border-radius: 4px;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+.thankyou-container {
+    padding: 1.2%;
+    text-align: center;
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+/* Logo styling */
+.header-logo {
+    display: inline-block;
+    margin-bottom: 15px;
+}
+
+.thankyou-logo {
+    width: 28em;
+    height: auto;
+    margin-bottom: 0em;
+}
+
+/* Match h1 styling with the rest of the page */
+.thankyou-container h2 {
+    color: #2C3E50; /* Dark cyan, matching site style */
+    font-size: 2.5em;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.thankyou-container p {
+    font-size: 1.2em;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+/* Match h1 styling with the rest of the page */
+.thankyou-container h2 {
+    color: #2C3E50; /* Dark cyan, matches other headings */
+    font-size: 2.5em; /* Large font size for emphasis */
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+/* Match p styling with the rest of the page */
+.thankyou-container p {
+  color: #34495E;
+  font-size: 1.2em;
+}
+
+/* General Table Styling */
+.order-summary table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.order-summary th, .order-summary td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.order-summary th {
+    background-color: #EBFFFF;
+}
+
+.order-summary tr:nth-child(odd) {
+    background-color: #f4faf9;
+}
+
+.order-summary tr:hover {
+    background-color: #c5e4f1;
+    cursor: pointer;
+}
+
+.payment-info {
+    margin-top: 3em;
+    padding: 10px;
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+}
+.payment-header {
+    display: flex;
+    align-items: center; /* Align vertically in the middle */
+    justify-content: center;
+}
+.payment-header h3 {
+    margin-right: 10px; /* Add some space between the heading and the logo */
+}
+
+.paypal-logo {
+    width: 150px;
+    height: auto;
+}
+
+#download-all-btn:hover {
+    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.3);
+    text-decoration: underline;
+}

@@ -1,0 +1,217 @@
+*{
+    border-radius: 4px;
+}
+
+/* Table Content Styling */
+#dataTable {
+  font-family: 'Open Sans', sans-serif; /* Consistent font with the rest of the page */
+  font-size: 14px; /* Slightly smaller font for clarity */
+  line-height: 1.5;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+
+
+/* Labels Styling */
+label {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+/* Filter Block Paragraph Styling */
+.p_filter_block {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 0.95em;
+}
+
+/* Select Boxes */
+select {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1em;
+}
+
+/* Bold Text for Important Info */
+#visibleRowCount {
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+/* Misc. Button Styling */
+button {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1em;
+  font-weight: bold;
+}
+
+
+/*w_hide_col_check_box.js*/
+/*w_hide_col_check_box.js*/
+/* Container Styling */
+/* Container Styling */
+/* Container Styling for each checkbox-wrapper */
+/* Container for each checkbox-wrapper */
+.checkbox-wrapper {
+    display: flex;
+    align-items: center;
+    padding: 2px 3px; /* Reduced padding for a more compact layout */
+    background-color: #f9f9f9;
+    border: 1px solid #d3d3d3;
+    border-radius: 4px;
+    margin-right: 1px;
+    margin-bottom: 2px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Label and Checkbox alignment */
+.checkbox-wrapper label {
+    margin-left: 0.1em;
+    cursor: pointer;
+    font-weight: normal;
+    font-size: 0.74em;
+}
+
+/* Hover effect for the wrapper */
+.checkbox-wrapper:hover {
+    background-color: #e7f4ff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Light shadow */
+}
+
+/* Flexbox container styling */
+#column-toggle-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 1px; /* Reduced gap for closer items */
+}
+
+/* Title Styling */
+.hide-column h4 {
+  font-size: 0.94em;
+  color: #333;
+  font-weight: bold;
+  margin: 8px;
+
+}
+
+.hide-column {
+    background-color: #f9f9f9;
+  padding: 1em;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-right: 1em;
+  max-width: 90%;
+  flex: 1; /* Let this column take up remaining space */
+}
+
+
+
+.view-cart-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 12px 20px;
+    font-size: 1.2em;
+    font-weight: bold;
+    background-color: #478ac9;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.view-cart-btn:hover {
+    background-color: #3BD7C8;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.view-cart-btn i {
+    font-size: 1.8em;
+    margin-right: 10px; /* Adds space between icon and text */
+}
+
+
+
+
+
+/*SIMPLE CART*/
+.simpleCart_items {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0px 0;
+    background: white;
+    padding: 0.3em;
+}
+
+.simpleCart_items  table th {
+  background-color: #EBFFFF; /* Light gray background for odd rows */
+}
+/* Alternating Row Colors */
+.simpleCart_items  table tr:nth-child(odd) {
+  background-color: #f4faf9; /* Light gray background for odd rows */
+}
+
+/* Row Hover Effect */
+.simpleCart_items  table tr:hover {
+  background-color: #c5e4f1; /* Slightly darker cyan on hover */
+  cursor: pointer;
+}
+
+
+
+
+.simpleCart_items th, .simpleCart_items td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.simpleCart_total, .simpleCart_quantity {
+    font-weight: bold;
+}
+
+button.simpleCart_checkout, button.simpleCart_empty {
+  background-color: #4CAF50;
+  color: white;
+  padding: 0.4em 0.5em;
+  margin: 10px;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2em;
+}
+
+button.simpleCart_checkout:hover, button.simpleCart_empty:hover {
+    background-color: #45a049;
+}
+/*SIMPLE CART*/
+/* Flexbox container for the hide-column and PayPal button */
+.row-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em;
+    background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 0.8em;
+  margin-right: 1em;
+  max-width: 98%;
+}
+
+
+/* PayPal button container */
+#paypal-button-container {
+  flex: 0 0 auto;
+  margin-left: 1px;
+  padding: 1em;
+    padding-top: 1em;
+  width: 16%;
+  display: flex;
+  flex-direction: column-reverse;
+  flex-wrap: nowrap;
+  align-content: center;
+  align-items: center;
+  padding-top: 2em;
+  gap: 0.2em;
+}
