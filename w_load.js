@@ -9,7 +9,7 @@ let explanationsData = [];
 // Function to load data and initialize the process
 function loadData() {
     const csvFilePath = 'd_result/pine_TW_img_info_5.csv';
-    const indicatorCsvFilePath = 'TW_pines_script/indicator_tech_explanation.csv'; // Path to explanations CSV
+    const indicatorCsvFilePath = 'd_result/indicator_tech_explanation.csv'; // Path to explanations CSV
 
     console.log(`Loading data from ${csvFilePath} and ${indicatorCsvFilePath}...`);
     // Load the indicator explanations
